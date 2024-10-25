@@ -1,9 +1,9 @@
-output "lb_arn" {
-  description = "The ARN of the Load Balancer"
-  value       = aws_lb.this.arn
+output "public_lb_dns_name" {
+  description = "The DNS name of the public load balancer"
+  value       = aws_lb.public_lb.dns_name
 }
 
-output "lb_dns_name" {
-  description = "The DNS name of the Load Balancer"
-  value       = aws_lb.this.dns_name
+output "internal_lb_dns_name" {
+  description = "The DNS name of the internal load balancer"
+  value       = aws_lb.internal_lb.dns_name
 }

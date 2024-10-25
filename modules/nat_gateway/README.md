@@ -1,38 +1,37 @@
 # NAT Gateway Module
 
-This module creates a NAT Gateway for allowing outbound internet traffic from private subnets.
-
-## Overview
-
-- **Resource Type**: AWS NAT Gateway
-- **Purpose**: To provide internet access for resources in private subnets.
+This module creates a NAT Gateway in a specified public subnet and associates it with an Elastic IP, to enable outbound internet traffic for resources in private subnets.
 
 ## Inputs
 
-| Name              | Description                     | Type     | Default |
-|-------------------|---------------------------------|----------|---------|
-| `vpc_id`          | The ID of the VPC              | `string` | `""`    |
-| `elastic_ip`      | Elastic IP for the NAT Gateway  | `string` | `""`    |
-| `tags`            | Tags to assign to the NAT Gateway | `map`    | `{}`    |
+| Variable           | Description                                        | Type     | Default         |
+|--------------------|----------------------------------------------------|----------|-----------------|
+| `public_subnet_id` | Public subnet's ID to deploy the NAT Gateway       | `string` | `""`            |
+| `eip_name`         | Elastic IP's name associated with the NAT Gateway  | `string` | `"eip_nat_gtw"` |
+| `nat_name`         | NAT Gateway's name tag                             | `string` | `"nat_gtw"`     |
 
 ## Outputs
 
-| Name           | Description                                |
-|----------------|--------------------------------------------|
-| `nat_gateway_id` | The ID of the created NAT Gateway        |
+| Output              | Description                                     |
+|---------------------|-------------------------------------------------|
+| `nat_gateway_id`    | Created NAT Gateway's ID                        |
+| `eip_id`            | Elastic IP's ID associated with the NAT Gateway |
 
 ## Usage
 
-Include this module in your Terraform configuration:
+Include this module in your Terraform configuration and modify `eip_name` and `nat_name` vars in `variables.tf`:
 
 ```hcl
-module "nat_gateway" {
-  source      = "./nat_gateway"
-  vpc_id      = module.vpc.vpc_id
-  elastic_ip  = "your_elastic_ip"
+variable "eip_name" {
+  description = "Elastic IP's name tag associated with the NAT Gateway"
+  type        = string
+  default     = "eip_nat_gtw"
+}
+
+variable "nat_name" {
+  description = "NAT Gateway's name tag"
+  type        = string
+  default     = "nat_gtw"
+}
 }
 ```
-
-## Additional Information
-
-Refer to the Terraform AWS provider documentation for more details on available parameters and configurations.

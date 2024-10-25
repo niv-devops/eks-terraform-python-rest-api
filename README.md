@@ -33,13 +33,13 @@ The cluster alongside its AWS components are organized into several Terraform mo
    cd hello-world-rest-apis/python_api
    ```
 
-2. Navigate to each module directory and run:
+2. Navigate to each module directory and configure `variables.tf` or `terraform.tfvars` files. Follow the instructions in the individual module READMEs for specific configurations and outputs.
+
+3. Initialize and apply the Terraform configuration:
    ```bash
    terraform init
    terraform apply
    ```
-
-3. Follow the instructions in the individual module READMEs for specific configurations and outputs.
 
 ## Usage
 
@@ -47,4 +47,4 @@ Once the deployment is complete, you can access the REST API through the Load Ba
 
 ## Cleanup
 
-To destroy the resources created, run `terraform destroy` in each module directory.
+To destroy the resources created, run `terraform destroy`.

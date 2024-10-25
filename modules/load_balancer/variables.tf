@@ -1,14 +1,14 @@
-variable "lb_name" {
-  description = "Name of the load balancer"
+variable "security_group_id" {
+  description = "The security group ID to associate with the load balancers"
   type        = string
 }
 
-variable "security_groups" {
-  description = "Security groups to attach to the load balancer"
+variable "public_subnets" {
+  description = "List of public subnet IDs for the load balancer"
   type        = list(string)
 }
 
-variable "subnet_ids" {
-  description = "Subnets where the load balancer will be deployed"
+variable "private_subnets" {
+  description = "List of private subnet IDs for the internal load balancer"
   type        = list(string)
 }

@@ -1,25 +1,28 @@
 # Load Balancer Module
 
-This module creates an Application Load Balancer (ALB) to distribute incoming traffic.
+This module creates public and internal Application Load Balancers (ALB) to distribute incoming traffic to the REST API running on EKS.
 
-## Overview
+## Features
 
-- **Resource Type**: AWS Application Load Balancer
-- **Purpose**: To distribute traffic to the REST API running on EKS.
+- Creates a public Application Load Balancer for internet-facing applications.
+- Creates an internal Application Load Balancer for private applications.
+- Configurable security groups for access control.
+- Outputs the DNS names of both load balancers.
 
-## Inputs
+### Inputs
 
-| Name              | Description                     | Type     | Default |
-|-------------------|---------------------------------|----------|---------|
-| `vpc_id`          | The ID of the VPC              | `string` | `""`    |
-| `subnet_ids`      | List of subnet IDs for ALB      | `list`   | `[]`    |
-| `tags`            | Tags to assign to the Load Balancer | `map`    | `{}`    |
+| Name               | Description                                       | Type             | Default  |
+|--------------------|---------------------------------------------------|------------------|----------|
+| `security_group_id` | The security group ID to associate with the load balancers | `string`         | `null`   |
+| `public_subnets`    | List of public subnet IDs for the load balancer  | `list(string)`   | `[]`     |
+| `private_subnets`   | List of private subnet IDs for the internal load balancer | `list(string)`   | `[]`     |
 
-## Outputs
+### Outputs
 
-| Name           | Description                                |
-|----------------|--------------------------------------------|
-| `load_balancer_id` | The ID of the created Load Balancer     |
+| Name                    | Description                                     |
+|-------------------------|-------------------------------------------------|
+| `public_lb_dns_name`   | The DNS name of the public load balancer       |
+| `internal_lb_dns_name` | The DNS name of the internal load balancer     |
 
 ## Usage
 
@@ -33,7 +36,3 @@ module "load_balancer" {
   tags        = { Name = "MyLoadBalancer" }
 }
 ```
-
-## Additional Information
-
-Refer to the Terraform AWS provider documentation for more details on available parameters and configurations.

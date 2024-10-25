@@ -1,13 +1,27 @@
-# modules/load_balancer/main.tf
-resource "aws_lb" "this" {
-  name               = var.lb_name
+resource "aws_lb" "public_lb" {
+  name               = "public-lb"
   internal           = false
   load_balancer_type = "application"
-  security_groups    = var.security_groups
-  subnets            = var.subnet_ids
+  security_groups    = [var.security_group_id]
+  subnets            = var.public_subnets
+
+  enable_deletion_protection = false
+
+  tags = {
+    Name = "public-lb"
+  }
 }
 
-# modules/load_balancer/variables.tf
-variable "lb_name" {}
-variable "security_groups" {}
-variable "subnet_ids" {}
+resource "aws_lb" "internal_lb" {
+  name               = "internal-lb"
+  internal           = true
+  load_balancer_type = "application"
+  security_groups    = [var.security_group_id]
+  subnets            = var.private_subnets
+
+  enable_deletion_protection = false
+
+  tags = {
+    Name = "internal-lb"
+  }
+}

@@ -1,43 +1,32 @@
 # EKS Cluster Module
 
-This module creates an Amazon EKS (Elastic Kubernetes Service) cluster.
+This module creates an Amazon EKS (Elastic Kubernetes Service) cluster to manage and orchestrate containerized applications using Kubernetes.
 
-## Overview
+## Features
 
-- **Resource Type**: AWS EKS Cluster
-- **Purpose**: To manage and orchestrate containerized applications using Kubernetes.
+- Creates an EKS cluster with configurable settings.
+- Supports node group creation.
+- Configurable IAM roles for cluster and node group access.
+- Outputs the cluster name, endpoint, and kubeconfig details.
 
-## Inputs
+### Inputs
 
-| Name              | Description                     | Type     | Default |
-|-------------------|---------------------------------|----------|---------|
-| `vpc_id`          | The ID of the VPC              | `string` | `""`    |
-| `subnet_ids`      | List of subnet IDs for EKS      | `list`   | `[]`    |
-| `cluster_name`    | Name of the EKS cluster         | `string` | `"my-eks-cluster"` |
-| `tags`            | Tags to assign to the EKS cluster | `map`    | `{}`    |
+| Name                           | Description                                              | Type             | Default  |
+|--------------------------------|----------------------------------------------------------|------------------|----------|
+| `cluster_name`                 | Name of the EKS cluster                                  | `string`         | `null`   |
+| `subnet_ids`                   | List of subnet IDs for EKS cluster nodes                | `list(string)`   | `[]`     |
+| `desired_capacity`             | Desired number of nodes in the node group               | `number`         | `1`      |
+| `max_capacity`                 | Maximum number of nodes in the node group                | `number`         | `5`      |
+| `min_capacity`                 | Minimum number of nodes in the node group                | `number`         | `1`      |
 
-## Outputs
+### Outputs
 
-| Name           | Description                                |
-|----------------|--------------------------------------------|
-| `cluster_id`   | The ID of the created EKS cluster          |
-| `cluster_endpoint` | The endpoint of the EKS cluster          |
-| `cluster_name` | The name of the EKS cluster                 |
+| Name                     | Description                                      |
+|--------------------------|--------------------------------------------------|
+| `cluster_name`           | The name of the EKS cluster                      |
+| `cluster_endpoint`       | The endpoint of the EKS cluster                  |
+| `kubeconfig`             | Kubeconfig file for accessing the cluster       |
 
 ## Usage
 
-Include this module in your Terraform configuration:
-
-```hcl
-module "eks_cluster" {
-  source         = "./eks_cluster"
-  vpc_id        = module.vpc.vpc_id
-  subnet_ids    = module.subnet.subnet_ids
-  cluster_name  = "MyEKSCluster"
-  tags          = { Name = "MyEKS" }
-}
-```
-
-## Additional Information
-
-Refer to the Terraform AWS provider documentation for more details on available parameters and configurations.
+Include this module in your Terraform configuration, edit the cluster's name, subnets IDs, desired and min/max capacities for node group in `variables.tf`.

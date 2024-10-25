@@ -1,39 +1,40 @@
 # Routing Table Module
 
-This module creates routing tables and associates them with subnets.
-
-## Overview
-
-- **Resource Type**: AWS Routing Tables
-- **Purpose**: To control the routing of network traffic within the VPC.
+This module creates public and private routing tables and associates them with corresponding subnets, to control the routing of network traffic within the VPC.
 
 ## Inputs
 
-| Name              | Description                      | Type     | Default |
-|-------------------|----------------------------------|----------|---------|
-| `vpc_id`          | The ID of the VPC               | `string` | `""`    |
-| `public_subnet_ids` | List of public subnet IDs      | `list`   | `[]`    |
-| `tags`            | Tags to assign to the routing table | `map`    | `{}`    |
+| Variable                    | Description                                           | Type     | Default                 |
+|-----------------------------|-------------------------------------------------------|----------|-------------------------|
+| `vpc_id`                    | The ID of the VPC to which the route tables belong    | `string` | `""`                    |
+| `public_subnet_id_a`        | The ID of the first public subnet                     | `string` | `""`                    |
+| `public_subnet_id_b`        | The ID of the second public subnet                    | `string` | `""`                    |
+| `private_subnet_id_a`       | The ID of the first private subnet                    | `string` | `""`                    |
+| `private_subnet_id_b`       | The ID of the second private subnet                   | `string` | `""`                    |
+| `public_route_table_name`   | The name tag for the public route table               | `string` | `"public_route_table"`  |
+| `private_route_table_name`  | The name tag for the private route table              | `string` | `"private_route_table"` |
 
 ## Outputs
 
-| Name           | Description                                |
-|----------------|--------------------------------------------|
-| `route_table_id` | The ID of the created route table         |
+| Output                    | Description                        |
+|---------------------------|------------------------------------|
+| `public_route_table_id`   | The ID of the public route table   |
+| `private_route_table_id`  | The ID of the private route table  |
 
 ## Usage
 
-Include this module in your Terraform configuration:
+Include this module in your Terraform configuration and modify the public and private RT names in `variables.tf`:
 
 ```hcl
-module "routing_table" {
-  source             = "./routing_table"
-  vpc_id            = module.vpc.vpc_id
-  public_subnet_ids = module.subnet.subnet_ids
-  tags              = { Name = "MyRouteTable" }
+variable "public_route_table_name" {
+  description = "The name tag for the public route table"
+  type        = string
+  default     = "public_route_table"
+}
+
+variable "private_route_table_name" {
+  description = "The name tag for the private route table"
+  type        = string
+  default     = "private_route_table"
 }
 ```
-
-## Additional Information
-
-Refer to the Terraform AWS provider documentation for more details on available parameters and configurations.
