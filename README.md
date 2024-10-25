@@ -35,10 +35,42 @@ The cluster alongside its AWS components are organized into several Terraform mo
 
 2. Navigate to each module directory and configure `variables.tf` or `terraform.tfvars` files. Follow the instructions in the individual module READMEs for specific configurations and outputs.
 
-3. Initialize and apply the Terraform configuration:
+3. For more configurations, refer to [Terraform's AWS Provider documentation](https://registry.terraform.io/providers/hashicorp/aws/latest/docs).
+
+4. Test your configurations, refer to `Tests` section.
+
+5. Initialize and apply the Terraform configuration:
    ```bash
    terraform init
    terraform apply
+   ```
+
+## Tests
+
+1. Run `terraform validate` to check whether the configuration is syntactically valid and internally consistent.
+
+2. Run `terraform plan` to see what changes will be made to your infrastructure without actually applying them.
+
+3. Integrate testing with Terraform using tools like `Terratest` to write tests that apply your Terraform code and then verify the infrastructure it creates.
+
+#### Example with Terratest
+
+1. **Install Go and Terratest**
+   - Make sure you have Go installed on your machine.
+   - Install Terratest:
+
+   ```bash
+   go get github.com/gruntwork-io/terratest/modules/terraform
+   ```
+
+2. **Create a Test File**
+   Create a test file in the `test` directory.
+
+3. **Run Tests**
+   To execute the tests, run:
+
+   ```bash
+   go test -v test/
    ```
 
 ## Usage
