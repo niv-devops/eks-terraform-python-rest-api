@@ -1,8 +1,8 @@
-# modules/internet_gateway/main.tf
-resource "aws_internet_gateway" "eks-igw" {
-  vpc_id = aws_vpc.eks-vpc.id
+resource "aws_internet_gateway" "eks_igw" {
+  vpc_id = var.vpc_id
   
   tags = {
-    Name = "eks-igw"
+    Name = var.igw_name
   }
 }
+

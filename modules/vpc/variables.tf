@@ -1,9 +1,9 @@
-variable "cidr_block" {
-  description = "The CIDR block for the VPC"
+variable "vpc_cidr_block" {
+  description = "CIDR block for the VPC"
   type        = string
 }
 
-variable "tags" {
-  description = "Tags to apply to the VPC"
+variable "vpc_tags" {
+  description = "Tags for the VPC"
   type        = map(string)
 }

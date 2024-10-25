@@ -1,9 +1,19 @@
-# modules/nat_gateway/main.tf
-resource "aws_nat_gateway" "this" {
-  allocation_id = var.eip_id
-  subnet_id     = var.public_subnet_id
+resource "aws_eip" "eip_nat_gtw" {
+  vpc = true
+
+  tags = {
+    Name = var.eip_name
+  }
 }
 
-# modules/nat_gateway/variables.tf
-variable "eip_id" {}
-variable "public_subnet_id" {}
+resource "aws_nat_gateway" "nat_gtw" {
+  allocation_id = aws_eip.eip_nat_gtw.id
+  subnet_id     = var.public_subnet_id
+
+  tags = {
+    Name = var.nat_name
+  }
+
+  depends_on = [aws_internet_gateway.eks_igw]
+}
+

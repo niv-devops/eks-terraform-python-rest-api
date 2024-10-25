@@ -1,41 +1,37 @@
 # Subnet Module
 
-This module creates subnets within the specified VPC.
-
-## Overview
-
-- **Resource Type**: AWS Subnets
-- **Purpose**: To define network segments for different availability zones.
+This module creates public and private subnets within a specified VPC, To define network segments for different availability zones.
 
 ## Inputs
 
-| Name              | Description                     | Type     | Default |
-|-------------------|---------------------------------|----------|---------|
-| `vpc_id`          | The ID of the VPC              | `string` | `""`    |
-| `subnet_cidrs`    | List of CIDR blocks for subnets | `list`   | `[]`    |
-| `availability_zones` | List of availability zones    | `list`   | `[]`    |
-| `tags`            | Tags to assign to the subnets   | `map`    | `{}`    |
+| Variable               | Description                              | Type            | Default                                   |
+|------------------------|------------------------------------------|-----------------|-------------------------------------------|
+| `vpc_id`               | VPC's ID in which to create subnets      | `string`        | `""`                                      |
+| `availability_zones`   | List of availability zones               | `list(string)`  | `["eu-central-1a", "eu-central-1b"]`      |
+| `private_cidr_blocks`  | List of CIDR blocks for public subnets   | `list(string)`  | `["192.168.0.0/19", "192.168.32.0/19"]`   |
+| `public_cidr_blocks`   | List of CIDR blocks for private subnets  | `list(string)`  | `["192.168.64.0/19", "192.168.96.0/19"]`  |
 
 ## Outputs
 
-| Name           | Description                                |
-|----------------|--------------------------------------------|
-| `subnet_ids`   | List of IDs of the created subnets         |
+| Output                     | Description                            |
+|----------------------------|----------------------------------------|
+| `public_subnet_ids`        | The IDs of the created public subnets  |
+| `private_subnet_ids`       | The IDs of the created private subnets |
 
 ## Usage
 
-Include this module in your Terraform configuration:
+Include this module in your Terraform configuration and modify `terraform.tfvars`:
 
 ```hcl
-module "subnet" {
-  source              = "./subnet"
-  vpc_id             = module.vpc.vpc_id
-  subnet_cidrs       = ["10.0.1.0/24", "10.0.2.0/24"]
-  availability_zones  = ["us-west-2a", "us-west-2b"]
-  tags                = { Name = "MySubnets" }
-}
+availability_zones = ["eu-central-1a", "eu-central-1b"]
+
+private_cidr_blocks = [
+  "192.168.0.0/19",
+  "192.168.32.0/19"
+]
+
+public_cidr_blocks = [
+  "192.168.64.0/19",
+  "192.168.96.0/19"
+]
 ```
-
-## Additional Information
-
-Refer to the Terraform AWS provider documentation for more details on available parameters and configurations.

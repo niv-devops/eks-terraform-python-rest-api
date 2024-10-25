@@ -1,35 +1,28 @@
 # Internet Gateway Module
 
-This module creates an Internet Gateway and attaches it to the VPC.
-
-## Overview
-
-- **Resource Type**: AWS Internet Gateway
-- **Purpose**: To allow internet access to resources in the VPC.
+This module creates an Internet Gateway and attaches it to the VPC, to provide internet access for its resources.
 
 ## Inputs
 
-| Name              | Description                     | Type     | Default |
-|-------------------|---------------------------------|----------|---------|
-| `vpc_id`          | The ID of the VPC              | `string` | `""`    |
+| Variable   | Description                              | Type     | Default     |
+|------------|------------------------------------------|----------|-------------|
+| `vpc_id`   | VPC's ID to attach the Internet Gateway  | `string` | `""`        |
+| `igw_name` | The name tag for the Internet Gateway    | `string` | `"eks-igw"` |
 
 ## Outputs
 
-| Name           | Description                                |
-|----------------|--------------------------------------------|
-| `internet_gateway_id` | The ID of the created Internet Gateway  |
+| Output                 | Description                        |
+|------------------------|------------------------------------|
+| `internet_gateway_id`  | ID of the created Internet Gateway |
 
 ## Usage
 
-Include this module in your Terraform configuration:
+Include this module in your Terraform configuration and modify `igw_name` var in `variables.tf`:
 
 ```hcl
-module "internet_gateway" {
-  source   = "./internet_gateway"
-  vpc_id   = module.vpc.vpc_id
+variable "igw_name" {
+  description = "Name tag for the Internet Gateway"
+  type        = string
+  default     = "eks_igw"
 }
 ```
-
-## Additional Information
-
-Refer to the Terraform AWS provider documentation for more details on available parameters and configurations.
