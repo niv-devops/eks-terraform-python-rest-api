@@ -1,9 +1,9 @@
 output "public_route_table_id" {
-  description = "The ID of the public route table"
+  description = "Public routing table's ID"
   value       = aws_route_table.public.id
 }
 
 output "private_route_table_id" {
-  description = "The ID of the private route table"
+  description = "Private routing table's ID"
   value       = aws_route_table.private.id
 }

@@ -11,28 +11,23 @@ This module creates public and internal Application Load Balancers (ALB) to dist
 
 ### Inputs
 
-| Name               | Description                                       | Type             | Default  |
-|--------------------|---------------------------------------------------|------------------|----------|
-| `security_group_id` | The security group ID to associate with the load balancers | `string`         | `null`   |
-| `public_subnets`    | List of public subnet IDs for the load balancer  | `list(string)`   | `[]`     |
-| `private_subnets`   | List of private subnet IDs for the internal load balancer | `list(string)`   | `[]`     |
+| Name                | Description                                             | Type             | Default  |
+|---------------------|---------------------------------------------------------|------------------|----------|
+| `security_group_id` | Security group's ID associated with the load balancers  | `string`         | `null`   |
+| `public_subnets`    | Public subnet IDs for the load balancer                 | `list(string)`   | `[]`     |
+| `private_subnets`   | Private subnet IDs for the internal load balancer       | `list(string)`   | `[]`     |
 
 ### Outputs
 
-| Name                    | Description                                     |
-|-------------------------|-------------------------------------------------|
-| `public_lb_dns_name`   | The DNS name of the public load balancer       |
-| `internal_lb_dns_name` | The DNS name of the internal load balancer     |
+| Name                   | Description                       |
+|------------------------|-----------------------------------|
+| `public_lb_dns_name`   | Public load balancer's DNS name   |
+| `internal_lb_dns_name` | Internal load balancer's DNS name |
 
 ## Usage
 
-Include this module in your Terraform configuration:
+Include this module in your Terraform configuration and modify SG in `terraform.tfvars`:
 
 ```hcl
-module "load_balancer" {
-  source      = "./load_balancer"
-  vpc_id      = module.vpc.vpc_id
-  subnet_ids  = module.subnet.subnet_ids
-  tags        = { Name = "MyLoadBalancer" }
-}
+security_group_id = "sg-#################"
 ```

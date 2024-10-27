@@ -1,5 +1,5 @@
 variable "public_subnet_id" {
-  description = "Public subnets ID to deploy the NAT Gateway to"
+  description = "Public subnets ID associated with the NAT Gateway"
   type        = string
 }
 

@@ -3,34 +3,34 @@ variable "vpc_id" {
   type        = string
 }
 
-variable "public_subnet_id_a" {
-  description = "The ID of the first public subnet"
-  type        = string
-}
-
-variable "public_subnet_id_b" {
-  description = "The ID of the second public subnet"
-  type        = string
-}
-
 variable "private_subnet_id_a" {
-  description = "The ID of the first private subnet"
+  description = "First private subnet's ID"
   type        = string
 }
 
 variable "private_subnet_id_b" {
-  description = "The ID of the second private subnet"
+  description = "Second private subnet's ID"
+  type        = string
+}
+
+variable "public_subnet_id_a" {
+  description = "First public subnet's ID"
+  type        = string
+}
+
+variable "public_subnet_id_b" {
+  description = "Second public subnet's ID"
   type        = string
 }
 
 variable "public_route_table_name" {
-  description = "The name tag for the public route table"
+  description = "Public routing table's name tag"
   type        = string
   default     = "public_route_table"
 }
 
 variable "private_route_table_name" {
-  description = "The name tag for the private route table"
+  description = "Private routing table's name tag"
   type        = string
   default     = "private_route_table"
 }

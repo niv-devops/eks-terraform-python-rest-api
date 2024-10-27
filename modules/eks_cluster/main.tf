@@ -1,4 +1,4 @@
-resource "aws_eks_cluster" "this" {
+resource "aws_eks_cluster" "eks_cluster" {
   name     = var.cluster_name
   role_arn = aws_iam_role.eks_role.arn
 
@@ -35,7 +35,7 @@ resource "aws_iam_role_policy_attachment" "eks_AmazonEKSClusterPolicy" {
 }
 
 resource "aws_eks_node_group" "this" {
-  cluster_name    = aws_eks_cluster.this.name
+  cluster_name    = aws_eks_cluster.eks_cluster.name
   node_group_name = "${var.cluster_name}-node-group"
   node_role_arn   = aws_iam_role.eks_node_group_role.arn
   subnet_ids      = var.subnet_ids
@@ -45,7 +45,7 @@ resource "aws_eks_node_group" "this" {
     min_size     = var.min_capacity
   }
 
-  depends_on = [aws_eks_cluster.this]
+  depends_on = [aws_eks_cluster.eks_cluster]
 }
 
 resource "aws_iam_role" "eks_node_group_role" {
