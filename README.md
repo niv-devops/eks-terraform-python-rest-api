@@ -29,8 +29,8 @@ The cluster alongside its AWS components are organized into several Terraform mo
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/alankrantas/hello-world-rest-apis.git
-   cd hello-world-rest-apis/python_api
+   git clone https://github.com/niv-devops/eks-terraform-python-rest-api.git
+   cd eks-terraform-python-rest-api
    ```
 
 2. Navigate to each module directory and configure `variables.tf` or `terraform.tfvars` files. Follow the instructions in the individual module READMEs for specific configurations and outputs.
@@ -59,15 +59,13 @@ The cluster alongside its AWS components are organized into several Terraform mo
    - Make sure you have Go installed on your machine.
    - Install Terratest:
 
-   ```bash
-   go get github.com/gruntwork-io/terratest/modules/terraform
-   ```
+     ```bash
+     go get github.com/gruntwork-io/terratest/modules/terraform
+     ```
 
-2. **Create a Test File**
-   Create a test file in the `test` directory.
+2. **Create a test File** in the `test` directory.
 
-3. **Run Tests**
-   To execute the tests, run:
+3. **Run Tests** - execute the tests with:
 
    ```bash
    go test -v test/
