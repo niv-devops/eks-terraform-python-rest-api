@@ -45,6 +45,15 @@ The cluster alongside its AWS components are organized into several Terraform mo
    terraform init
    terraform apply
    ```
+   
+6. **(Optional)**: Use other API for deployment - Partial clone for Python REST API repo only:
+    ```bash
+   git clone --filter=blob:none --no-checkout https://github.com/alankrantas/hello-world-rest-apis.git
+   cd hello-world-rest-apis
+   git sparse-checkout init --cone
+   git sparse-checkout set python_api
+   git checkout
+   ```
 
 ## Tests
 
