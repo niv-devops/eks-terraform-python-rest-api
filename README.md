@@ -1,7 +1,7 @@
 ## "Hello World" Simple REST API
 
 This repo contains a simple REST API written in python using flask, which can also be deployed to docker containers.
-https://github.com/alankrantas/hello-world-rest-apis/tree/main/python_api
+Based on - https://github.com/alankrantas/hello-world-rest-apis/tree/main/python_api
 
 ## "Hello World" REST API Deployment with Terraform on EKS
 
