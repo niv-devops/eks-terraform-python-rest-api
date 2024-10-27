@@ -40,3 +40,13 @@ variable "min_capacity" {
   type        = number
   default     = 1
 }
+
+variable "s3_bucket_name" {
+  description = "S3 bucket's name"
+  type        = string
+}
+
+variable "dynamodb_table_name" {
+  description = "DynamoDB's table name"
+  type        = string
+}

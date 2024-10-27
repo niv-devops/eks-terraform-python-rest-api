@@ -46,3 +46,13 @@ module "eks_cluster" {
   max_capacity     = var.max_capacity
   min_capacity     = var.min_capacity
 }
+
+module "s3" {
+  source      = "./modules/s3"
+  bucket_name = var.s3_bucket_name
+}
+
+module "dynamodb" {
+  source      = "./modules/dynamoDB"
+  table_name  = var.dynamodb_table_name
+}

@@ -18,6 +18,7 @@ The cluster alongside its AWS components are organized into several Terraform mo
 - **NAT Gateway Module**: Enables instances in a private subnet to initiate outbound traffic to the internet.
 - **Load Balancer Module**: Configures an application load balancer to distribute traffic to the API.
 - **EKS Cluster Module**: Deploys an EKS cluster for running containerized applications.
+- **State Locking**: Configures S3 backend using DynamoDB as a locking mechanism for Terraform's state locking features.
 
 ## Prerequisites
 
